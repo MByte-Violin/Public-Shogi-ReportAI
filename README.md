@@ -19,11 +19,12 @@ APIキーや個人情報の管理は利用者自身が行ってください。
 ---
 
 ## ユーザー向けセットアップ手順
-下記URLを参照してください
-https://qiita.com/qiita_bird/items/9f745861a75e61e6a534
-ツール概要は下記
-https://qiita.com/qiita_bird/items/c965245f1d856db95163
-https://note.com/good_clover824/n/nd44fe79d56fa
+- 下記URLを参照してください
+  - https://qiita.com/qiita_bird/items/9f745861a75e61e6a534
+
+- ツール概要は下記
+  - https://qiita.com/qiita_bird/items/c965245f1d856db95163
+  - https://note.com/good_clover824/n/nd44fe79d56fa
 
 ---
 
