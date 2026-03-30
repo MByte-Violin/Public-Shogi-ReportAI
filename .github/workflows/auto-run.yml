@@ -1,0 +1,55 @@
+name: Auto Shogi Report
+
+on:
+  schedule:
+    - cron: '0 17 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  
+jobs:
+  run-pipeline:
+    runs-on: windows-latest
+
+    env:
+      WARS_ID: ${{ secrets.WARS_ID }}
+      API_KEY_FREE: ${{ secrets.API_KEY_FREE }}
+      API_KEY01: ${{ secrets.API_KEY01 }}
+      API_KEY02: ${{ secrets.API_KEY02 }}
+      API_KEY03: ${{ secrets.API_KEY03 }}
+      API_KEY04: ${{ secrets.API_KEY04 }}
+      API_KEY05: ${{ secrets.API_KEY05 }}
+      APP_PASSCODE: ${{ secrets.APP_PASSCODE }}
+      REPO_OWNER: ${{ secrets.REPO_OWNER }}
+      REPO_NAME: ${{ secrets.REPO_NAME }}
+      REPO_BRANCH: ${{ secrets.REPO_BRANCH }}
+      REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+      PYTHONIOENCODING: utf-8
+
+    steps:
+      - name: リポジトリをチェックアウト（履歴付き）
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+          
+      - name: UTF-8 を強制
+        run: chcp 65001
+          
+      - name: exe を実行
+        run: |
+          echo "🚀 main.exe を実行します"
+          .\src\main.exe
+
+      - name: 出力ファイルをGitHubにコミット＆プッシュ
+        if: always()
+        shell: pwsh
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git status
+          git add temp/ reports/ backup/ logs/ 戦型別/ themes/
+          git status
+          git commit -m "📊 自動実行: $(Get-Date -Format 'yyyy-MM-dd HH:mm') の出力とクリーンアップ" || echo "No changes to commit"
+          git push || echo "❌ git push failed"

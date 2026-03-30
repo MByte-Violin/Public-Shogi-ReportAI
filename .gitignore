@@ -1,0 +1,7 @@
+# Environment variables (CRITICAL)
+.env*
+!.env.example
+.env
+
+# Python specific
+__pycache__/

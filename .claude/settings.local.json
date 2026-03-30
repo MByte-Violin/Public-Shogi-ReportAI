@@ -1,0 +1,11 @@
+{
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "microsoft_learn_mcp"
+  ],
+  "permissions": {
+    "allow": [
+      "Bash(rm:*)"
+    ]
+  }
+}
